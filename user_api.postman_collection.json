@@ -1,0 +1,195 @@
+{
+	"info": {
+		"_postman_id": "966e3398-46d6-430f-a0a2-420b2abaeb56",
+		"name": "user_api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18445399"
+	},
+	"item": [
+		{
+			"name": "sign_up",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\" : \"john\",\r\n    \"lastName\"  : \"ab\",\r\n    \"email\" : \"gmlzaib@gmail.com\",\r\n    \"password\" : \"12345678\"\r\n\r\n\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/auth/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\" : \"gmlzaib@gmail.com\",\r\n    \"password\" : \"12345678\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "verify_otp",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\" : \"gmlzaib@gmail.com\",\r\n    \"otp\" : \"727306\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/auth/verifyOtp",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"auth",
+						"verifyOtp"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "verify-token#",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/auth/verify-email/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzkzOWY4N2FlMDkyMWVkMWNkYWVlODYiLCJlbWFpbCI6ImdtbHphaWJAZ21haWwuY29tIiwiaWF0IjoxNzM3NzI3ODc5LCJleHAiOjE3Mzc3MzE0Nzl9.ktJ91ekDryXsqL9aot2ow7URXyRsHKxbjbim-HosWLo",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"auth",
+						"verify-email",
+						"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzkzOWY4N2FlMDkyMWVkMWNkYWVlODYiLCJlbWFpbCI6ImdtbHphaWJAZ21haWwuY29tIiwiaWF0IjoxNzM3NzI3ODc5LCJleHAiOjE3Mzc3MzE0Nzl9.ktJ91ekDryXsqL9aot2ow7URXyRsHKxbjbim-HosWLo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "forgot-password",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\" : \"gmlzaib@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/auth/forgot-password",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"auth",
+						"forgot-password"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "reset-password",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"newPassword\" : \"11223344\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/auth/reset-password/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzkzOWY4N2FlMDkyMWVkMWNkYWVlODYiLCJlbWFpbCI6ImdtbHphaWJAZ21haWwuY29tIiwiaWF0IjoxNzM3NzMxODE5LCJleHAiOjE3Mzc3MzU0MTl9.W4Cx52Hhej2cBU0JqErgl41t951f9slw0O_t6YQM_IE",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"auth",
+						"reset-password",
+						"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzkzOWY4N2FlMDkyMWVkMWNkYWVlODYiLCJlbWFpbCI6ImdtbHphaWJAZ21haWwuY29tIiwiaWF0IjoxNzM3NzMxODE5LCJleHAiOjE3Mzc3MzU0MTl9.W4Cx52Hhej2cBU0JqErgl41t951f9slw0O_t6YQM_IE"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
