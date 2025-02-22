@@ -4,8 +4,8 @@ const {
   validateEmail,
   validateOTP,
 } = require("../services/authService");
-const {sendVerificationEmail} = require("../services/emailService");
-const {generateToken} = require("../utils/jwtHandler");
+const { sendVerificationEmail } = require("../services/emailService");
+const { generateVerificationToken, generateSessionToken } = require("../utils/jwtHandler");
 const User = require("../models/userModal");
 
 exports.register = async (req, res) => {
@@ -19,9 +19,9 @@ exports.register = async (req, res) => {
     }
     const user = new User({ firstName, lastName, email, password });
     await user.save();
-    console.log(generateToken);
-    const token = await generateToken(user._id, user.email);
-    await sendVerificationEmail(user.email, token);
+
+    const verificationToken = await generateVerificationToken(user._id, user.email);
+    await sendVerificationEmail(user.email, verificationToken);
     res
       .status(201)
       .json({ message: "Registration successful. Please verify your email." });
@@ -32,8 +32,15 @@ exports.register = async (req, res) => {
 
 exports.login = async (req, res) => {
   try {
-    const token = await loginUser(req.body);
-    res.json({ message: "OTP sent to your email.", token });
+    const user = await loginUser(req.body);
+    const sessionToken = await generateSessionToken(user._id, user.email);
+    res.cookie('authToken', sessionToken, {
+      httpOnly: true,
+      secure: true,   
+      sameSite: 'Strict', 
+      maxAge: 24 * 60 * 60 * 1000, 
+    });
+    res.json({ message: "OTP sent to your email." });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
@@ -42,7 +49,6 @@ exports.login = async (req, res) => {
 exports.verifyEmail = async (req, res) => {
   try {
     const { token } = req.params;
-    console.log(token);
     await validateEmail(token);
     res.json({ message: "Email verified successfully." });
   } catch (error) {
@@ -53,16 +59,16 @@ exports.verifyEmail = async (req, res) => {
 exports.verifyOTP = async (req, res) => {
   try {
     const { email, otp } = req.body;
-
-    const token = await validateOTP(email, otp);
-    res.json({ message: "OTP verified successfully.", token });
+    const user = await validateOTP(email, otp);
+    const sessionToken = await generateSessionToken(user._id, user.email);
+    res.cookie('authToken', sessionToken, {
+      httpOnly: true, 
+      secure: true,   
+      sameSite: 'Strict', 
+      maxAge: 24 * 60 * 60 * 1000, 
+    });
+    res.json({ message: "OTP verified successfully." });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
 };
-
-
-
-
-
-
